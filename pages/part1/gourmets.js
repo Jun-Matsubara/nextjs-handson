@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import getConfig from 'next/config';
 //追加
 import Container from '@mui/material/Container';
@@ -24,8 +24,21 @@ const fetchData = async (keyword) => {
   return await res.json();
 };
 
-const Shops = ({ shops }) => {
+const Shops = ({ firstViewShops }) => {
   const [keyword, setKeyword] = React.useState('');
+  const [shops, setShops] = React.useState([]);
+
+  useEffect(() => {
+    setShops(firstViewShops);
+  }, [firstViewShops]);
+
+  const onSearchClick = async () => {
+    const data = await fetchData(keyword);
+
+    setShops(data);
+    setKeyword('');
+  };
+
   return (
     <Container component="main" maxWidth="md">
       <Box
@@ -54,7 +67,7 @@ const Shops = ({ shops }) => {
           margin="normal"
           fullWidth
           onClick={() => {
-            setKeyword('');
+            onSearchClick();
           }}
         >
           検索
@@ -109,7 +122,7 @@ export const getServerSideProps = async (req) => {
 
   return {
     props: {
-      shops: data,
+      firstViewShops: data,
     },
   };
 };
