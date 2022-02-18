@@ -7,6 +7,8 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+//追加
+import Typography from '@mui/material/Typography';
 
 //追加
 const styles = {
@@ -18,7 +20,8 @@ const styles = {
   `,*/
 };
 
-const Mui = () => {
+const Store = () => {
+  const [keyword, setKeyword] = React.useState('');
   return (
     <Container component="main" maxWidth="xs" css={styles.container}>
       <Box
@@ -32,13 +35,16 @@ const Mui = () => {
         }}
         css={styles.box}
       >
+        <Typography>検索ワード: {keyword}</Typography>
         <TextField
           label="キーワードを入力してください"
           variant="standard"
           margin="normal"
           fullWidth
+          value={keyword}
           onChange={(event) => {
-            console.log('input change', event.target.value);
+            /*console.log('input change', event.target.value);*/
+            setKeyword(event.target.value);
           }}
         />
         <Button
@@ -46,7 +52,8 @@ const Mui = () => {
           margin="normal"
           fullWidth
           onClick={() => {
-            console.log('button click');
+            /*console.log('button click');*/
+            setKeyword('');
           }}
         >
           検索
@@ -56,4 +63,4 @@ const Mui = () => {
   );
 };
 
-export default Mui;
+export default Store;
