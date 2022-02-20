@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-//追加
+//追加(なくても使える、他でも使えるようにしている)
 import Typography from '@mui/material/Typography';
 
 //追加
@@ -51,8 +51,9 @@ const Store = () => {
           variant="contained"
           margin="normal"
           fullWidth
-          onClick={() => {
-            /*console.log('button click');*/
+          /*value={keyword}*/
+          onClick={(event) => {
+            /*console.log(event.target.value);*/
             setKeyword('');
           }}
         >
@@ -62,5 +63,6 @@ const Store = () => {
     </Container>
   );
 };
-
+//{keyword}に値が格納されている
+//buttonのコンソールにキーワードを格納すれば画面遷移の時にキーワードを保存できるかも
 export default Store;
