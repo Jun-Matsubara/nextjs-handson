@@ -19,4 +19,6 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
+//Headはタイトル変更
+//ThemeProviderでテーマ色変更 themeが反映される
 export default MyApp;
