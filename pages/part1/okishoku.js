@@ -20,10 +20,12 @@ import Avatar from '@mui/material/Avatar';
 //selectボタン
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { autocompleteClasses } from '@mui/material';
+import { autocompleteClasses, iconButtonClasses } from '@mui/material';
 //アイコン
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 import DehazeIcon from '@mui/icons-material/Dehaze';
+import { ChangeCircleOutlined } from '@material-ui/icons';
 
 //追加
 const styles = {
@@ -54,6 +56,7 @@ const styles = {
     position: absolute;
     bottom: 0;
     right: 50px;
+    font-size: 50px;
   `,
   ham: css`
     color: #fff;
@@ -95,25 +98,28 @@ const Shops = ({ firstViewShops }) => {
     setKeyword('');
     //setKeywordを空白に更新
   };
+  const star = ['<StarBorderIcon />', 'StarIcon'];
+  //お気に入り
+  const convertFavShops = (shops) => {
+    const favShops = JSON.parse(localStorage.getItem('favShops')) || [];
+    return shops.map((shop) => {
+      if (favShops.includes(shop.id)) {
+        return {
+          ...shop,
+          icon: '★',
+          //fav: favShops.includes(shop.id),
+        };
+      } else {
+        return {
+          ...shop,
+          icon: '☆',
+          //fav: favShops.includes(shop.id),
+        };
+      }
+    });
+  };
 
   const [fav, setFav] = React.useState([]);
-
-  //お気に入り登録
-  const onFavClick = async () => {
-    const favShops = JSON.parse(localStorage.getItem('favShops')) || [];
-    //const key = inArray(fav, favShops);
-
-    if (favShops.includes(fav)) {
-      const index = favShops.indexOf(fav);
-      favShops.splice(index, 1);
-    } else {
-      favShops.push(fav);
-      const btn = document.getElementsByClassName(fav);
-    }
-
-    localStorage.setItem('favShops', JSON.stringify(favShops));
-    console.log(favShops);
-  };
 
   return (
     <Container component="main" maxWidth="100">
@@ -447,7 +453,7 @@ const Shops = ({ firstViewShops }) => {
                     <Avatar alt={shop.name} src={shop.logo_image} />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={<>{shop.name}</>}
+                    primary={<>{` ${shop.name}`}</>}
                     secondary={
                       <>
                         <Typography variant="body1" component="span">
@@ -463,14 +469,29 @@ const Shops = ({ firstViewShops }) => {
                         <input type="hidden" name="shop" value={shop.id}></input>
                         <span
                           css={styles.span}
-                          name={shop.id}
+                          //name={shop.id}
                           onClick={() => {
-                            fav = shop.id;
                             console.log(shop.id);
-                            onFavClick();
+                            // 取得 なければ空配列
+                            const favShops = JSON.parse(localStorage.getItem('favShops')) || [];
+                            console.log(favShops);
+                            const favInclude = favShops.includes(shop.id);
+                            if (favInclude) {
+                              // 存在したらお気に入りから外す
+                              const index = favShops.indexOf(shop.id);
+                              favShops.splice(index, 1);
+                            } else {
+                              // 存在しなければお気に入りにい追加する
+                              favShops.push(shop.id);
+                            }
+                            // 保存
+                            localStorage.setItem('favShops', JSON.stringify(favShops));
+                            // 画面の更新
+                            setShops(convertFavShops(shops));
+                            console.log(shop.fav);
                           }}
                         >
-                          <StarBorderIcon />
+                          {`${shop.icon}`}
                         </span>
                       </>
                     }
