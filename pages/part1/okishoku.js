@@ -21,21 +21,27 @@ import Avatar from '@mui/material/Avatar';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { autocompleteClasses } from '@mui/material';
+//アイコン
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import DehazeIcon from '@mui/icons-material/Dehaze';
 
 //追加
 const styles = {
   box: css`
     margin: 0 auto;
+    position: relative;
   `,
   box1: css`
     margin: 0 auto;
-    height: 300px;
   `,
   h1: css`
     font-size: 35px;
     text-align: center;
   `,
   toppage: css`
+    position: relative;
+  `,
+  title: css`
     font-size: 60px;
     color: #fff;
     font-weight: 700;
@@ -43,6 +49,17 @@ const styles = {
   list: css`
    height:100px:
    background:#555;
+  `,
+  span: css`
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+  `,
+  ham: css`
+    color: #fff;
+    position: absolute;
+    right: 20px;
+    top: 40px;
   `,
 };
 
@@ -79,6 +96,25 @@ const Shops = ({ firstViewShops }) => {
     //setKeywordを空白に更新
   };
 
+  const [fav, setFav] = React.useState([]);
+
+  //お気に入り登録
+  const onFavClick = async () => {
+    const favShops = JSON.parse(localStorage.getItem('favShops')) || [];
+    //const key = inArray(fav, favShops);
+
+    if (favShops.includes(fav)) {
+      const index = favShops.indexOf(fav);
+      favShops.splice(index, 1);
+    } else {
+      favShops.push(fav);
+      const btn = document.getElementsByClassName(fav);
+    }
+
+    localStorage.setItem('favShops', JSON.stringify(favShops));
+    console.log(favShops);
+  };
+
   return (
     <Container component="main" maxWidth="100">
       <Box
@@ -93,10 +129,118 @@ const Shops = ({ firstViewShops }) => {
           width: 1,
         }}
       >
-        Okishoku
+        <h2 css={styles.title}>Okishoku</h2>
+        <span css={styles.ham}>
+          <DehazeIcon sx={{ fontSize: 80 }} />
+        </span>
       </Box>
 
       <h1 css={styles.h1}>地域</h1>
+
+      <Box
+        component="form"
+        noValidate
+        maxWidth="md"
+        css={styles.box1}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          bgcolor: 'orange',
+          width: 1,
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid container item spacing={3}>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '那覇';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                那覇
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '浦添';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                浦添
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '北谷';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                北谷
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '沖縄市';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                沖縄市
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '西原';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                西原
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '嘉手納';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                嘉手納
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <h1 css={styles.h1}>ジャンル</h1>
 
       <Box
         component="form"
@@ -119,12 +263,12 @@ const Shops = ({ firstViewShops }) => {
                 fullWidth
                 sx={{ margin: 4 }}
                 onClick={() => {
-                  keyword = '那覇';
+                  keyword = '';
                   console.log(keyword);
                   onSearchClick();
                 }}
               >
-                那覇
+                すべて
               </Button>
             </Grid>
             <Grid item xs={6} sm={4} md={4} lg={2}>
@@ -133,12 +277,12 @@ const Shops = ({ firstViewShops }) => {
                 fullWidth
                 sx={{ margin: 4 }}
                 onClick={() => {
-                  keyword = '浦添';
+                  keyword = '居酒屋';
                   console.log(keyword);
                   onSearchClick();
                 }}
               >
-                浦添
+                居酒屋
               </Button>
             </Grid>
             <Grid item xs={6} sm={4} md={4} lg={2}>
@@ -147,12 +291,12 @@ const Shops = ({ firstViewShops }) => {
                 fullWidth
                 sx={{ margin: 4 }}
                 onClick={() => {
-                  keyword = '北谷';
+                  keyword = 'フレンチ';
                   console.log(keyword);
                   onSearchClick();
                 }}
               >
-                北谷
+                フレンチ
               </Button>
             </Grid>
             <Grid item xs={6} sm={4} md={4} lg={2}>
@@ -161,12 +305,12 @@ const Shops = ({ firstViewShops }) => {
                 fullWidth
                 sx={{ margin: 4 }}
                 onClick={() => {
-                  keyword = '沖縄市';
+                  keyword = 'ラーメン';
                   console.log(keyword);
                   onSearchClick();
                 }}
               >
-                沖縄市
+                ラーメン
               </Button>
             </Grid>
             <Grid item xs={6} sm={4} md={4} lg={2}>
@@ -175,12 +319,103 @@ const Shops = ({ firstViewShops }) => {
                 fullWidth
                 sx={{ margin: 4 }}
                 onClick={() => {
-                  keyword = '西原';
+                  keyword = '和食';
                   console.log(keyword);
                   onSearchClick();
                 }}
               >
-                西原
+                和食
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <h1 css={styles.h1}>こだわり</h1>
+
+      <Box
+        component="form"
+        noValidate
+        maxWidth="md"
+        css={styles.box1}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          bgcolor: 'orange',
+          width: 1,
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid container item spacing={3}>
+            <Grid item xs={6} sm={4} md={4} lg={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '禁煙';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                禁煙席有り
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={4} md={4} lg={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '利用可';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                カード払いOK
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={4} md={4} lg={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = 'お子様';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                子連れ歓迎！
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={4} md={4} lg={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '駐車場';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                駐車場有り
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={4} md={4} lg={2}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ margin: 4 }}
+                onClick={() => {
+                  keyword = '1500';
+                  console.log(keyword);
+                  onSearchClick();
+                }}
+              >
+                お手頃価格
               </Button>
             </Grid>
           </Grid>
@@ -204,32 +439,42 @@ const Shops = ({ firstViewShops }) => {
             return (
               <ListItem key={shop.id}>
                 <ListItemButton
-                  onClick={() => {
+                /* onClick={() => {
                     // TODO: goto shop detail
-                  }}
+                  }}*/
                 >
-                  <a a href={shop.urls.pc}>
-                    <ListItemAvatar>
-                      <Avatar alt={shop.name} src={shop.logo_image} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={<>{shop.name}</>}
-                      secondary={
-                        <>
-                          <Typography variant="body1" component="span">
-                            {shop.address} / {shop.genre.name}
-                            <br></br>
-                            {`${shop.catch} ${shop.shop_detail_memo}`}
-                            <br></br>
-                            ￥:{shop.budget.average}/カード{shop.card}
-                          </Typography>
-
-                          <Typography variant="caption"></Typography>
-                          <p>{shop.open}</p>
-                        </>
-                      }
-                    />
-                  </a>
+                  <ListItemAvatar>
+                    <Avatar alt={shop.name} src={shop.logo_image} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={<>{shop.name}</>}
+                    secondary={
+                      <>
+                        <Typography variant="body1" component="span">
+                          {shop.address} / {shop.genre.name}
+                          <br></br>
+                          {`${shop.catch} ${shop.shop_detail_memo}`}
+                          <br></br>
+                          ￥:{shop.budget.average}/カード{shop.card}
+                        </Typography>
+                        <Typography variant="caption"></Typography>
+                        <p>{shop.open}</p>
+                        <br></br>
+                        <input type="hidden" name="shop" value={shop.id}></input>
+                        <span
+                          css={styles.span}
+                          name={shop.id}
+                          onClick={() => {
+                            fav = shop.id;
+                            console.log(shop.id);
+                            onFavClick();
+                          }}
+                        >
+                          <StarBorderIcon />
+                        </span>
+                      </>
+                    }
+                  />
                 </ListItemButton>
               </ListItem>
             );
