@@ -6,6 +6,8 @@ import { css } from '@emotion/react';
 //追加
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 //grid
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -73,6 +75,48 @@ const styles = {
     font-size: 40px;
     font-weight: 800;
   `,
+  card: css`
+    background: #777777;
+    color: #fff;
+    padding: 5px;
+    border-radius: 20px;
+  `,
+  price: css`
+    background: #ffd700;
+    padding: 5px;
+    border-radius: 20px;
+  `,
+  genre: css`
+    background: #fa8072;
+    color: #fff;
+    padding: 5px;
+    border-radius: 20px;
+  `,
+  address: css`
+    background: #2e8b57;
+    color: #fff;
+    padding: 5px;
+    border-radius: 20px;
+  `,
+  urls: css`
+    background: #555;
+    color: #fff;
+    padding: 5px;
+    border-radius: 20px;
+  `,
+  list: css`
+    height: 600px;
+    overflow: scroll;
+  `,
+  listitem: css`
+    border: 1px solid #555;
+    margin-bottom: 10px;
+  `,
+  img: css`
+    height: 200px;
+    width: 200px;
+    mrgin-left: 80%;
+  `,
 };
 
 const fetchData = async (keyword) => {
@@ -105,7 +149,6 @@ const Shops = ({ firstViewShops }) => {
 
     setShops(convertFavShops(data));
     //setShopsに最新のkeywordをぶち込む
-    setKeyword('');
     //setKeywordを空白に更新
   };
   const star = ['<StarBorderIcon />', 'StarIcon'];
@@ -178,6 +221,7 @@ const Shops = ({ firstViewShops }) => {
                   keyword = '那覇';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
                 那覇
@@ -193,6 +237,7 @@ const Shops = ({ firstViewShops }) => {
                   keyword = '浦添';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
                 浦添
@@ -208,6 +253,7 @@ const Shops = ({ firstViewShops }) => {
                   keyword = '北谷';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
                 北谷
@@ -223,6 +269,7 @@ const Shops = ({ firstViewShops }) => {
                   keyword = '沖縄市';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
                 沖縄市
@@ -238,6 +285,7 @@ const Shops = ({ firstViewShops }) => {
                   keyword = '西原';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
                 西原
@@ -253,6 +301,7 @@ const Shops = ({ firstViewShops }) => {
                   keyword = '嘉手納';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
                 嘉手納
@@ -278,79 +327,104 @@ const Shops = ({ firstViewShops }) => {
         }}
       >
         <Grid container spacing={1}>
-          <Grid container item spacing={3}>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+          <Grid container item direction="row" justifyContent="center" alignItems="center" spacing={3}>
+            <Grid item xs={4} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword('すべて');
                 }}
               >
-                <FoodBankIcon />
+                <FoodBankIcon sx={{ fontSize: 80 }} />
                 すべて
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={4} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '居酒屋';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
-                <LocalDrinkIcon />
+                <LocalDrinkIcon sx={{ fontSize: 80 }} />
                 居酒屋
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={4} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = 'フレンチ';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
-                <RestaurantIcon />
+                <RestaurantIcon sx={{ fontSize: 80 }} />
                 フレンチ
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = 'ラーメン';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
-                <RamenDiningIcon />
+                <RamenDiningIcon sx={{ fontSize: 80 }} />
                 ラーメン
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '和食';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword(keyword);
                 }}
               >
-                <SetMealIcon />
+                <SetMealIcon sx={{ fontSize: 80 }} />
                 和食
               </Button>
             </Grid>
@@ -375,78 +449,103 @@ const Shops = ({ firstViewShops }) => {
       >
         <Grid container spacing={1}>
           <Grid container item spacing={3}>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '禁煙';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword('禁煙席有り');
                 }}
               >
-                <SmokeFreeIcon />
+                <SmokeFreeIcon sx={{ fontSize: 80 }} />
                 禁煙席有り
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '利用可';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword('カードOK!');
                 }}
               >
-                <CreditCardIcon />
+                <CreditCardIcon sx={{ fontSize: 80 }} />
                 カードOK!
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = 'お子様';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword('子連れ歓迎');
                 }}
               >
-                <ChildFriendlyIcon />
+                <ChildFriendlyIcon sx={{ fontSize: 80 }} />
                 子連れ歓迎
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '駐車場';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword('駐車場有り');
                 }}
               >
-                <LocalParkingIcon />
+                <LocalParkingIcon sx={{ fontSize: 80 }} />
                 駐車場有り
               </Button>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={2}>
+            <Grid item xs={6} sm={4} md={4} lg={2.4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                sx={{
+                  margin: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
                 onClick={() => {
                   keyword = '1500';
                   console.log(keyword);
                   onSearchClick();
+                  setKeyword('お手頃価格');
                 }}
               >
-                <ThumbUpOffAltIcon />
+                <ThumbUpOffAltIcon sx={{ fontSize: 80 }} />
                 お手頃価格
               </Button>
             </Grid>
@@ -466,35 +565,48 @@ const Shops = ({ firstViewShops }) => {
           alignItems: 'center',
         }}
       >
-        <h1 css={styles.h1}>検索結果</h1>
-        <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+        <h1 css={styles.h1}>検索ワード:{keyword}</h1>
+        <List sx={{ width: '100%', bgcolor: 'background.paper' }} css={styles.list}>
           {shops.map((shop) => {
             const url = 'https://maps.google.com/maps?q=';
             return (
-              <ListItem key={shop.id}>
-                <ListItemAvatar>
-                  <Avatar alt={shop.name} src={shop.logo_image} />
-                </ListItemAvatar>
+              <ListItem key={shop.id} css={styles.listitem}>
+                <ImageList sx={{ gridTemplateColumns: 'none !important' }}>
+                  <ImageListItem key={shop.id} css={styles.img}>
+                    <img src={shop.photo.pc.l} loading="lazy" />
+                  </ImageListItem>
+                </ImageList>
                 <ListItemText
                   primary={
                     <>
-                      <a href={shop.urls.pc}>{` ${shop.name}`}</a>
+                      {` ${shop.name}`}▶︎
+                      <a href={shop.urls.pc} css={styles.urls}>
+                        詳細ページはこちら
+                      </a>
                     </>
                   }
                   secondary={
                     <>
                       <Typography variant="body1" component="span">
-                        <a href={`${url}${shop.lat},${shop.lng}`}>{shop.address}</a>/ {shop.genre.name}
+                        <br></br>
+                        {shop.address}▶︎
+                        <a href={`${url}${shop.lat},${shop.lng}`} css={styles.address}>
+                          Google Mapで見る
+                        </a>
                         <br></br>
                         <br></br>
                         {`${shop.catch} ${shop.shop_detail_memo}`}
                         <br></br>
-                        ￥:{shop.budget.average}/カード{shop.card}
+                        <br></br>
+                        <span css={styles.price}>￥:{shop.budget.average}</span>
+                        <span css={styles.card}>カード{shop.card}</span>
+                        <span css={styles.genre}>{shop.genre.name}</span>
                       </Typography>
                       <Typography variant="caption"></Typography>
                       <p>{shop.open}</p>
                       <br></br>
                       <input type="hidden" name="shop" value={shop.id}></input>
+                      <br></br>
                       <span
                         css={styles.span}
                         //name={shop.id}
