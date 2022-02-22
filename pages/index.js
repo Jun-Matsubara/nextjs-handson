@@ -17,13 +17,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-//selectボタン
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import { autocompleteClasses, iconButtonClasses } from '@mui/material';
 //アイコン
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import StarIcon from '@mui/icons-material/Star';
+//import StarBorderIcon from '@mui/icons-material/StarBorder';
+//import StarIcon from '@mui/icons-material/Star';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 import { ChangeCircleOutlined } from '@material-ui/icons';
 
