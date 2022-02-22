@@ -117,6 +117,24 @@ const styles = {
     width: 200px;
     mrgin-left: 80%;
   `,
+  blue: css`
+    color: #0099cc;
+  `,
+  blue2: css`
+    color: #003366;
+  `,
+  red: css`
+    color: #cc3333;
+  `,
+  white: css`
+    color: #fff;
+  `,
+  green: css`
+    color: #009933;
+  `,
+  gray: css`
+    color: #666666;
+  `,
 };
 
 const fetchData = async (keyword) => {
@@ -364,7 +382,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword(keyword);
                 }}
               >
-                <LocalDrinkIcon sx={{ fontSize: 80 }} />
+                <LocalDrinkIcon css={styles.blue} sx={{ fontSize: 80 }} />
                 居酒屋
               </Button>
             </Grid>
@@ -384,7 +402,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword(keyword);
                 }}
               >
-                <RestaurantIcon sx={{ fontSize: 80 }} />
+                <RestaurantIcon css={styles.white} sx={{ fontSize: 80 }} />
                 フレンチ
               </Button>
             </Grid>
@@ -404,7 +422,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword(keyword);
                 }}
               >
-                <RamenDiningIcon sx={{ fontSize: 80 }} />
+                <RamenDiningIcon css={styles.red} sx={{ fontSize: 80 }} />
                 ラーメン
               </Button>
             </Grid>
@@ -424,7 +442,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword(keyword);
                 }}
               >
-                <SetMealIcon sx={{ fontSize: 80 }} />
+                <SetMealIcon css={styles.green} sx={{ fontSize: 80 }} />
                 和食
               </Button>
             </Grid>
@@ -465,7 +483,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword('禁煙席有り');
                 }}
               >
-                <SmokeFreeIcon sx={{ fontSize: 80 }} />
+                <SmokeFreeIcon css={styles.gray} sx={{ fontSize: 80 }} />
                 禁煙席有り
               </Button>
             </Grid>
@@ -525,7 +543,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword('駐車場有り');
                 }}
               >
-                <LocalParkingIcon sx={{ fontSize: 80 }} />
+                <LocalParkingIcon css={styles.blue2} sx={{ fontSize: 80 }} />
                 駐車場有り
               </Button>
             </Grid>
@@ -545,7 +563,7 @@ const Shops = ({ firstViewShops }) => {
                   setKeyword('お手頃価格');
                 }}
               >
-                <ThumbUpOffAltIcon sx={{ fontSize: 80 }} />
+                <ThumbUpOffAltIcon css={styles.white} sx={{ fontSize: 80 }} />
                 お手頃価格
               </Button>
             </Grid>
