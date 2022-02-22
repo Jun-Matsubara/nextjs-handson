@@ -21,7 +21,16 @@ import Avatar from '@mui/material/Avatar';
 //import StarBorderIcon from '@mui/icons-material/StarBorder';
 //import StarIcon from '@mui/icons-material/Star';
 import DehazeIcon from '@mui/icons-material/Dehaze';
-import { ChangeCircleOutlined } from '@material-ui/icons';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
+import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import RamenDiningIcon from '@mui/icons-material/RamenDining';
+import SetMealIcon from '@mui/icons-material/SetMeal';
+import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import ChildFriendlyIcon from '@mui/icons-material/ChildFriendly';
+import LocalParkingIcon from '@mui/icons-material/LocalParking';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 
 //追加
 const styles = {
@@ -60,6 +69,10 @@ const styles = {
     right: 20px;
     top: 40px;
   `,
+  fontsize: css`
+    font-size: 40px;
+    font-weight: 800;
+  `,
 };
 
 const fetchData = async (keyword) => {
@@ -82,14 +95,15 @@ const Shops = ({ firstViewShops }) => {
   const [shops, setShops] = React.useState([]);
   //setShopsをshopsという名前に保持している
   useEffect(() => {
-    setShops(firstViewShops);
+    setShops(convertFavShops(firstViewShops));
+    //iconの属性がセットされていなかった
   }, [firstViewShops]);
   //keyword変更後に検索内容を変更しないといけないと言っている(元のデータからの整形)
   const onSearchClick = async () => {
     const data = await fetchData(keyword);
     //onclickを押したとにその時のkeywordを取得
 
-    setShops(data);
+    setShops(convertFavShops(data));
     //setShopsに最新のkeywordをぶち込む
     setKeyword('');
     //setKeywordを空白に更新
@@ -131,7 +145,7 @@ const Shops = ({ firstViewShops }) => {
           width: 1,
         }}
       >
-        <h2 css={styles.title}>Okishoku</h2>
+        <h3 css={styles.title}>Okishoku</h3>
         <span css={styles.ham}>
           <DehazeIcon sx={{ fontSize: 80 }} />
         </span>
@@ -148,17 +162,18 @@ const Shops = ({ firstViewShops }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          bgcolor: 'orange',
+          //bgcolor: 'orange',
           width: 1,
         }}
       >
         <Grid container spacing={1}>
           <Grid container item spacing={3}>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                css={styles.fontsize}
+                sx={{ margin: 4, height: 80 }}
                 onClick={() => {
                   keyword = '那覇';
                   console.log(keyword);
@@ -168,11 +183,12 @@ const Shops = ({ firstViewShops }) => {
                 那覇
               </Button>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                css={styles.fontsize}
+                sx={{ margin: 4, height: 80 }}
                 onClick={() => {
                   keyword = '浦添';
                   console.log(keyword);
@@ -182,11 +198,12 @@ const Shops = ({ firstViewShops }) => {
                 浦添
               </Button>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                css={styles.fontsize}
+                sx={{ margin: 4, height: 80 }}
                 onClick={() => {
                   keyword = '北谷';
                   console.log(keyword);
@@ -196,11 +213,12 @@ const Shops = ({ firstViewShops }) => {
                 北谷
               </Button>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                css={styles.fontsize}
+                sx={{ margin: 4, height: 80 }}
                 onClick={() => {
                   keyword = '沖縄市';
                   console.log(keyword);
@@ -210,11 +228,12 @@ const Shops = ({ firstViewShops }) => {
                 沖縄市
               </Button>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                css={styles.fontsize}
+                sx={{ margin: 4, height: 80 }}
                 onClick={() => {
                   keyword = '西原';
                   console.log(keyword);
@@ -224,11 +243,12 @@ const Shops = ({ firstViewShops }) => {
                 西原
               </Button>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
-                sx={{ margin: 4 }}
+                css={styles.fontsize}
+                sx={{ margin: 4, height: 80 }}
                 onClick={() => {
                   keyword = '嘉手納';
                   console.log(keyword);
@@ -253,7 +273,7 @@ const Shops = ({ firstViewShops }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          bgcolor: 'orange',
+          //bgcolor: 'orange',
           width: 1,
         }}
       >
@@ -270,6 +290,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <FoodBankIcon />
                 すべて
               </Button>
             </Grid>
@@ -284,6 +305,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <LocalDrinkIcon />
                 居酒屋
               </Button>
             </Grid>
@@ -298,6 +320,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <RestaurantIcon />
                 フレンチ
               </Button>
             </Grid>
@@ -312,6 +335,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <RamenDiningIcon />
                 ラーメン
               </Button>
             </Grid>
@@ -326,6 +350,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <SetMealIcon />
                 和食
               </Button>
             </Grid>
@@ -344,7 +369,7 @@ const Shops = ({ firstViewShops }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          bgcolor: 'orange',
+          //bgcolor: 'orange',
           width: 1,
         }}
       >
@@ -361,6 +386,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <SmokeFreeIcon />
                 禁煙席有り
               </Button>
             </Grid>
@@ -375,7 +401,8 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
-                カード払いOK
+                <CreditCardIcon />
+                カードOK!
               </Button>
             </Grid>
             <Grid item xs={6} sm={4} md={4} lg={2}>
@@ -389,7 +416,8 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
-                子連れ歓迎！
+                <ChildFriendlyIcon />
+                子連れ歓迎
               </Button>
             </Grid>
             <Grid item xs={6} sm={4} md={4} lg={2}>
@@ -403,6 +431,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <LocalParkingIcon />
                 駐車場有り
               </Button>
             </Grid>
@@ -417,6 +446,7 @@ const Shops = ({ firstViewShops }) => {
                   onSearchClick();
                 }}
               >
+                <ThumbUpOffAltIcon />
                 お手頃価格
               </Button>
             </Grid>
@@ -436,63 +466,64 @@ const Shops = ({ firstViewShops }) => {
           alignItems: 'center',
         }}
       >
+        <h1 css={styles.h1}>検索結果</h1>
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
           {shops.map((shop) => {
+            const url = 'https://maps.google.com/maps?q=';
             return (
               <ListItem key={shop.id}>
-                <ListItemButton
-                /* onClick={() => {
-                    // TODO: goto shop detail
-                  }}*/
-                >
-                  <ListItemAvatar>
-                    <Avatar alt={shop.name} src={shop.logo_image} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={<>{` ${shop.name}`}</>}
-                    secondary={
-                      <>
-                        <Typography variant="body1" component="span">
-                          {shop.address} / {shop.genre.name}
-                          <br></br>
-                          {`${shop.catch} ${shop.shop_detail_memo}`}
-                          <br></br>
-                          ￥:{shop.budget.average}/カード{shop.card}
-                        </Typography>
-                        <Typography variant="caption"></Typography>
-                        <p>{shop.open}</p>
+                <ListItemAvatar>
+                  <Avatar alt={shop.name} src={shop.logo_image} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <>
+                      <a href={shop.urls.pc}>{` ${shop.name}`}</a>
+                    </>
+                  }
+                  secondary={
+                    <>
+                      <Typography variant="body1" component="span">
+                        <a href={`${url}${shop.lat},${shop.lng}`}>{shop.address}</a>/ {shop.genre.name}
                         <br></br>
-                        <input type="hidden" name="shop" value={shop.id}></input>
-                        <span
-                          css={styles.span}
-                          //name={shop.id}
-                          onClick={() => {
-                            console.log(shop.id);
-                            // 取得 なければ空配列
-                            const favShops = JSON.parse(localStorage.getItem('favShops')) || [];
-                            console.log(favShops);
-                            const favInclude = favShops.includes(shop.id);
-                            if (favInclude) {
-                              // 存在したらお気に入りから外す
-                              const index = favShops.indexOf(shop.id);
-                              favShops.splice(index, 1);
-                            } else {
-                              // 存在しなければお気に入りにい追加する
-                              favShops.push(shop.id);
-                            }
-                            // 保存
-                            localStorage.setItem('favShops', JSON.stringify(favShops));
-                            // 画面の更新
-                            setShops(convertFavShops(shops));
-                            console.log(shop.fav);
-                          }}
-                        >
-                          {`${shop.icon}`}
-                        </span>
-                      </>
-                    }
-                  />
-                </ListItemButton>
+                        <br></br>
+                        {`${shop.catch} ${shop.shop_detail_memo}`}
+                        <br></br>
+                        ￥:{shop.budget.average}/カード{shop.card}
+                      </Typography>
+                      <Typography variant="caption"></Typography>
+                      <p>{shop.open}</p>
+                      <br></br>
+                      <input type="hidden" name="shop" value={shop.id}></input>
+                      <span
+                        css={styles.span}
+                        //name={shop.id}
+                        onClick={() => {
+                          console.log(shop.id);
+                          // 取得 なければ空配列
+                          const favShops = JSON.parse(localStorage.getItem('favShops')) || [];
+                          console.log(favShops);
+                          const favInclude = favShops.includes(shop.id);
+                          if (favInclude) {
+                            // 存在したらお気に入りから外す
+                            const index = favShops.indexOf(shop.id);
+                            favShops.splice(index, 1);
+                          } else {
+                            // 存在しなければお気に入りにい追加する
+                            favShops.push(shop.id);
+                          }
+                          // 保存
+                          localStorage.setItem('favShops', JSON.stringify(favShops));
+                          // 画面の更新
+                          setShops(convertFavShops(shops));
+                          console.log(shop.fav);
+                        }}
+                      >
+                        {`${shop.icon}`}
+                      </span>
+                    </>
+                  }
+                />
               </ListItem>
             );
           })}
